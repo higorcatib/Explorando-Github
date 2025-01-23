@@ -1,50 +1,68 @@
-# exercícios de logica em python 
+# Lista inicial de tarefas
+tarefas = ["Comprar leite", "Estudar Python", "Assistir filme"]
 
-#Sintaxe Básica
-#python
-nome = "Alice"
-idade = 30
-print(f"Nome: {nome}, Idade: {idade}")
-#Estruturas de Controle
+def exibir_tarefas(tarefas):
+    """Função para exibir todas as tarefas"""
+    print("\nLista de Tarefas:")
+    for i, tarefa in enumerate(tarefas):
+        print(f"{i + 1}. {tarefa}")
+    print("\n")
 
-#Condicionais (if, elif, else)
-idade = 20
-if idade < 18:
-    print("Menor de idade")
-elif idade < 60:
-    print("Adulto")
-else:
-    print("Idoso")
-#Loops (for, while)
-# Usando for
-for i in range(5):
-    print(i)
-# Usando while
-contador = 0
-while contador < 5:
-    print(contador)
-    contador += 1
+def adicionar_tarefa(tarefas, tarefa):
+    """Função para adicionar uma nova tarefa"""
+    tarefas.append(tarefa)
+    print(f'Tarefa "{tarefa}" adicionada com sucesso!')
 
-#Funções
-def saudacao(nome):
-    return f"Olá, {nome}!"
+def remover_tarefa(tarefas, indice):
+    """Função para remover uma tarefa pelo índice"""
+    try:
+        removida = tarefas.pop(indice - 1)
+        print(f'Tarefa "{removida}" removida com sucesso!')
+    except IndexError:
+        print("Erro: Índice de tarefa inválido!")
 
-print(saudacao("Mundo"))
+def editar_tarefa(tarefas, indice, nova_tarefa):
+    """Função para editar uma tarefa existente"""
+    try:
+        tarefas[indice - 1] = nova_tarefa
+        print(f'Tarefa {indice} editada com sucesso para "{nova_tarefa}"!')
+    except IndexError:
+        print("Erro: Índice de tarefa inválido!")
 
-#Listas e Dicionários
-frutas = ["maçã", "banana", "cereja"]
-print(frutas[0])  # Imprime "maçã"
+def main():
+    """Função principal para gerenciar o programa"""
+    while True:
+        exibir_tarefas(tarefas)
+        print("Selecione uma opção:")
+        print("1. Adicionar Tarefa")
+        print("2. Remover Tarefa")
+        print("3. Editar Tarefa")
+        print("4. Sair")
+        
+        opcao = input("Opção: ")
+        
+        if opcao == "1":
+            nova_tarefa = input("Digite a nova tarefa: ")
+            adicionar_tarefa(tarefas, nova_tarefa)
+        elif opcao == "2":
+            try:
+                indice = int(input("Digite o número da tarefa para remover: "))
+                remover_tarefa(tarefas, indice)
+            except ValueError:
+                print("Erro: Por favor, insira um número válido!")
+        elif opcao == "3":
+            try:
+                indice = int(input("Digite o número da tarefa para editar: "))
+                nova_tarefa = input("Digite a nova descrição da tarefa: ")
+                editar_tarefa(tarefas, indice, nova_tarefa)
+            except ValueError:
+                print("Erro: Por favor, insira um número válido!")
+        elif opcao == "4":
+            print("Saindo do programa. Até logo!")
+            break
+        else:
+            print("Opção inválida! Por favor, tente novamente.")
 
-#Dicionários
-aluno = {"nome": "Ana", "nota": 9.5}
-print(aluno["nome"])  # Imprime "Ana"
-
-#Compreensões de Lista
-quadrados = [x ** 2 for x in range(10)]
-print(quadrados)  # Imprime [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
-
-#Exceções e Tratamento de Erros
-try:
-    resultado = 10 / 0
-except ZeroDivisionError:
-    print("Divisão por zero não é permitida")
+# Execução do programa
+if __name__ == "__main__":
+    main()
