@@ -25,7 +25,7 @@ O primeiro passo em qualquer projeto de IA é processar e preparar seus dados:
 dados = pd.read_csv("dados.csv")`
 ````
 
-# Limpar e preparar dados`
+# Limpar e preparar dados
 ````
 dados.dropna(inplace=True)
 dados['coluna_categoria'] = dados['coluna_categoria'].astype('category').cat.codes
